@@ -1,0 +1,11 @@
+dist
+.DS_Store
+Thumbds.db
+__tests__/
+src/
+tsconfig.json
+jest.config.json
+.eslintrc
+.travis.yml
+.editorconfig
+.vscode

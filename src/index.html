@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zerolinesjs</title>
+    <script type="module" src="./main.ts"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="bg-red-100 w-full h-screen">page.1</div>
+    <div class="bg-blue-100 w-full h-screen">page.2</div>
+    <div class="bg-green-100 w-full h-screen">page.3</div>
+    <div class="bg-green-100 w-full h-screen">page.3</div>
+    <div class="bg-green-100 w-full h-screen">page.3</div>
+    <div class="bg-green-100 w-full h-screen">page.3</div>
+    <div class="fixed bottom-20 right-20 flex space-x-4">
+      <button
+        class="bg-gray-800 text-white rounded-full h-14 w-14 hover:bg-gray-600 transition"
+        data-zl="scroll-top speedy"
+      >
+        早く
+      </button>
+      <button
+        class="bg-gray-800 text-white rounded-full h-14 w-14 hover:bg-gray-600 transition"
+        data-zl="scroll-top"
+      >
+        普通
+      </button>
+      <button
+        class="bg-gray-800 text-white rounded-full h-14 w-14 hover:bg-gray-600 transition"
+        data-zl="scroll-top slowly"
+      >
+        遅く
+      </button>
+    </div>
+  </body>
+</html>
