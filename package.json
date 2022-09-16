@@ -14,7 +14,6 @@
     "lint": "run-s lint:*",
     "lint:eslint": "eslint . --ext .ts,.tsx --fix",
     "lint:prettier": "prettier --write .",
-    "prepare": "simple-git-hooks",
     "start": "parcel serve src/index.html"
   },
   "keywords": [],
