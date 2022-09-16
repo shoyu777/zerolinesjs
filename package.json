@@ -1,25 +1,49 @@
 {
-  "name": "percel-poc",
-  "version": "1.0.0",
+  "name": "zerolinesjs",
+  "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "/dist/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "start": "parcel serve src/index.html",
-    "fix:prettier": "prettier --write src",
-    "lint:prettier": "prettier --check src"
+    "prebuild": "rimraf dist",
+    "build": "run-p build:*",
+    "build:common": "tsc",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "test": "jest",
+    "lint": "run-s lint:*",
+    "lint:eslint": "eslint . --ext .ts,.tsx --fix",
+    "lint:prettier": "prettier --write .",
+    "prepare": "simple-git-hooks",
+    "start": "parcel serve src/index.html"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
+    "@jest/types": "^29.0.3",
+    "@types/jest": "^29.0.2",
+    "@types/node": "^18.7.18",
     "@parcel/transformer-typescript-tsc": "^2.7.0",
     "@parcel/validator-typescript": "^2.7.0",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "jest": "^29.0.3",
+    "npm-run-all": "^4.1.5",
     "parcel": "^2.7.0",
     "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
+    "simple-git-hooks": "^2.8.0",
+    "ts-jest": "^29.0.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.8.3"
+  },
+  "files": [
+    "dist"
+  ],
+  "simple-git-hooks": {
+    "pre-commit": "npm test && npm run lint"
   }
 }
