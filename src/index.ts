@@ -1,14 +1,14 @@
-import ScrollTop from './components/scrolltop';
+import Factory from './utils/factory';
 
 function init() {
   if (typeof window === 'object') {
     const elements = document.querySelectorAll('[data-zl]');
 
+    const factory = new Factory();
+
     elements.forEach((element) => {
       if (element instanceof HTMLElement) {
-        if (element.dataset.zl?.includes('scroll-top')) {
-          new ScrollTop(element);
-        }
+        factory.create(element);
       }
     });
   }
