@@ -10,30 +10,18 @@ const DROPDOWN_TOGGLE = 'dropdown-toggle';
 const MODAL_TOGGLE = 'modal-toggle';
 
 class Factory {
-  public create(element: HTMLElement) {
+  public create(element: HTMLElement, parameter: string) {
     // Scroll Top
-    if (element.dataset.zl?.includes(SCROLL_TOP)) {
+    if (parameter.includes(SCROLL_TOP)) {
       new ScrollTop(element);
     }
     // DropDown
-    if (element.dataset.zl?.includes(DROPDOWN_TOGGLE)) {
-      const matched_target_selector = element.dataset.zl.match(TARGET_REGEX);
-      if (matched_target_selector) {
-        const toggle_target = document.querySelector(
-          matched_target_selector[0]
-        ) as HTMLElement;
-        new DropDown(element, toggle_target);
-      }
+    if (parameter.includes(DROPDOWN_TOGGLE)) {
+      new DropDown(element, parameter);
     }
     // Modal
-    if (element.dataset.zl?.includes(MODAL_TOGGLE)) {
-      const matched_target_selector = element.dataset.zl.match(TARGET_REGEX);
-      if (matched_target_selector) {
-        const toggle_target = document.querySelector(
-          matched_target_selector[0]
-        ) as HTMLElement;
-        new Modal(element, toggle_target);
-      }
+    if (parameter.includes(MODAL_TOGGLE)) {
+      new Modal(element, parameter);
     }
   }
 }

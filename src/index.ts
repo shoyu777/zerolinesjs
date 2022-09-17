@@ -8,7 +8,7 @@ function init() {
 
     elements.forEach((element) => {
       if (element instanceof HTMLElement) {
-        factory.create(element);
+        factory.create(element, element.dataset.zl);
       }
     });
 

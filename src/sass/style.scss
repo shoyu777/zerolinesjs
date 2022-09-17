@@ -1,14 +1,44 @@
-$redColor: #ea5b54;
-
-.container {
-  .box {
-    background-color: $redColor;
-  }
-  .text {
-    color: aqua;
-  }
+[zl-cloak] {
+  display: none !important;
 }
 
-body {
-  color: green;
+.zerolines {
+  /*
+  // display
+  */
+  &_hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+  &_show {
+    visibility: visible;
+    opacity: 1;
+  }
+  /*
+  // display
+  */
+  &_transition {
+    transition-property: opacity, visibility, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 100ms;
+  }
+
+  /*
+  // opacity
+  */
+  &_opacity-0 {
+    opacity: 0;
+  }
+  &_opacity-100 {
+    opacity: 1;
+  }
+  /*
+  // duration
+  */
+  &_duration-quickly {
+    transition-duration: 300ms;
+  }
+  &_duration-slowly {
+    transition-duration: 500ms;
+  }
 }
