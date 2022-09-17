@@ -2,7 +2,6 @@ class ScrollTop {
   element: HTMLElement;
 
   constructor(element: HTMLElement) {
-    console.log('construct');
     this.element = element;
     this._init(element);
   }

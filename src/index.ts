@@ -11,6 +11,12 @@ function init() {
         factory.create(element);
       }
     });
+
+    document.querySelectorAll('[zl-cloak]').forEach((element) => {
+      if (element instanceof HTMLElement) {
+        element.removeAttribute('zl-cloak');
+      }
+    });
   }
 }
 
