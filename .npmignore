@@ -3,7 +3,12 @@ Thumbds.db
 tests/
 src/
 tsconfig.json
+tsconfig.esm.json
 jest.config.json
 .eslintrc.json
 .editorconfig
 .vscode
+.github
+webpack.config.js
+.prettierrc
+.parcelrc
