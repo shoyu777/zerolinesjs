@@ -1,20 +1,38 @@
-class DropDownToggle {
-  element: HTMLElement;
-  toggle_target: HTMLElement;
+const HIDE_CLASS = 'zerolines_hidden';
+const SHOW_CLASS = 'zerolines_show';
 
-  constructor(element: HTMLElement, toggle_target: HTMLElement) {
-    this.element = element;
-    this.toggle_target = toggle_target;
-    this._init(element, toggle_target);
+// regexs
+const TARGET_REGEX = /(?<=target-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa
+
+class DropDown {
+  toggleElement: HTMLElement;
+  toggleTarget: HTMLElement;
+
+  constructor(toggleElement: HTMLElement, parameter: string) {
+    this.toggleElement = toggleElement;
+
+    const matchedTargetSelector = parameter.match(TARGET_REGEX);
+    if (matchedTargetSelector) {
+      const toggleTarget = document.querySelector(
+        matchedTargetSelector[0]
+      ) as HTMLElement;
+      this.toggleTarget = toggleTarget;
+    }
+
+    this._init();
   }
 
-  _init(element: HTMLElement, toggle_target: HTMLElement) {
-    // 初期状態でtargetを消した状態
-    toggle_target.classList.add('hidden');
+  _init() {
+    const toggleElement = this.toggleElement;
+    const toggleTarget = this.toggleTarget;
 
-    element.addEventListener('click', function () {
-      if (toggle_target) {
-        toggle_target.classList.toggle('hidden');
+    // 初期状態でtargetを消した状態
+    toggleTarget.classList.add('zerolines_transition', HIDE_CLASS);
+
+    toggleElement.addEventListener('click', function () {
+      if (toggleTarget) {
+        toggleTarget.classList.toggle(SHOW_CLASS);
+        toggleTarget.classList.toggle(HIDE_CLASS);
       }
     });
 
@@ -22,15 +40,16 @@ class DropDownToggle {
     window.addEventListener('click', function (event) {
       if (
         event &&
-        (element.contains(event.target as HTMLElement) ||
-          toggle_target.contains(event.target as HTMLElement))
+        (toggleElement.contains(event.target as HTMLElement) ||
+          toggleTarget.contains(event.target as HTMLElement))
       ) {
         return;
       }
 
-      toggle_target.classList.add('hidden');
+      toggleTarget.classList.remove(SHOW_CLASS);
+      toggleTarget.classList.add(HIDE_CLASS);
     });
   }
 }
 
-export default DropDownToggle;
+export default DropDown;

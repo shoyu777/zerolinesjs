@@ -1,27 +1,30 @@
-import DropDownToggle from '../components/dropdown';
+import Drawer from '../components/drawer';
+import DropDown from '../components/dropdown';
+import Modal from '../components/model';
 import ScrollTop from '../components/scrolltop';
-
-// regexs
-const TARGET_REGEX = /(?<=target-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa
 
 const SCROLL_TOP = 'scroll-top';
 const DROPDOWN_TOGGLE = 'dropdown-toggle';
+const MODAL_TOGGLE = 'modal-toggle';
+const DRAWER_TOGGLE = 'drawer-toggle';
 
 class Factory {
-  public create(element: HTMLElement) {
+  public create(element: HTMLElement, parameter: string) {
     // Scroll Top
-    if (element.dataset.zl?.includes(SCROLL_TOP)) {
+    if (parameter.includes(SCROLL_TOP)) {
       new ScrollTop(element);
     }
     // DropDown
-    if (element.dataset.zl?.includes(DROPDOWN_TOGGLE)) {
-      const matched_target_selector = element.dataset.zl.match(TARGET_REGEX);
-      if (matched_target_selector) {
-        const toggle_target = document.querySelector(
-          matched_target_selector[0]
-        ) as HTMLElement;
-        new DropDownToggle(element, toggle_target);
-      }
+    if (parameter.includes(DROPDOWN_TOGGLE)) {
+      new DropDown(element, parameter);
+    }
+    // Modal
+    if (parameter.includes(MODAL_TOGGLE)) {
+      new Modal(element, parameter);
+    }
+    // Drawer
+    if (parameter.includes(DRAWER_TOGGLE)) {
+      new Drawer(element, parameter);
     }
   }
 }

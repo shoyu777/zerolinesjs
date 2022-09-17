@@ -8,23 +8,27 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "run-p build:*",
-    "build:common": "tsc",
+    "build:style": "sass src/sass/style.scss dist/style.min.css --style compressed",
+    "build:common": "webpack --mode=production",
     "build:esm": "tsc -p tsconfig.esm.json",
     "test": "jest",
     "lint": "run-s lint:*",
     "lint:eslint": "eslint . --ext .ts,.tsx --fix",
     "lint:prettier": "prettier --write .",
-    "start": "parcel serve src/index.html"
+    "dev": "run-s dev:*",
+    "dev:init": "rimraf dist",
+    "dev:start": "parcel serve src/index.html"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@jest/types": "^29.0.3",
-    "@types/jest": "^29.0.2",
-    "@types/node": "^18.7.18",
+    "@parcel/transformer-sass": "^2.7.0",
     "@parcel/transformer-typescript-tsc": "^2.7.0",
     "@parcel/validator-typescript": "^2.7.0",
+    "@types/jest": "^29.0.2",
+    "@types/node": "^18.7.18",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "eslint": "^8.23.1",
@@ -34,9 +38,15 @@
     "parcel": "^2.7.0",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
+    "sass": "^1.54.9",
+    "sass-loader": "^13.0.2",
     "ts-jest": "^29.0.1",
+    "ts-loader": "^9.3.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.3",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-fix-style-only-entries": "^0.6.1"
   },
   "files": [
     "dist"

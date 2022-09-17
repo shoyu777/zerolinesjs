@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "module": "ES6",
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
-    "strict": true,
+    "outDir": "dist",
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
     "lib": ["ES2020", "dom"],
-    "types": ["node", "jest"],
-    "outDir": "dist"
+    "types": ["node", "jest"]
   },
   "include": ["src"]
 }

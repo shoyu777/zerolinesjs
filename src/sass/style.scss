@@ -1,0 +1,60 @@
+[zl-cloak] {
+  display: none !important;
+}
+
+.zerolines {
+  /*
+  // display
+  */
+  &_hidden {
+    visibility: hidden;
+    transition-duration: 0ms !important;
+  }
+  &_show {
+    visibility: visible;
+    transition-duration: 0ms !important;
+  }
+  &_hidden_o {
+    visibility: hidden;
+    opacity: 0;
+  }
+  &_show_o {
+    visibility: visible;
+    opacity: 1;
+  }
+  &_hidden_t {
+    visibility: hidden;
+    transform: translateX(-100%);
+  }
+  &_show_t {
+    visibility: visible;
+    transform: translateX(0);
+  }
+  /*
+  // display
+  */
+  &_transition {
+    transition-property: opacity, visibility, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+
+  /*
+  // opacity
+  */
+  &_opacity-0 {
+    opacity: 0;
+  }
+  &_opacity-100 {
+    opacity: 1;
+  }
+  /*
+  // duration
+  */
+  &_duration-quickly {
+    transition-duration: 300ms;
+  }
+  &_duration-slowly {
+    transition-duration: 500ms;
+  }
+}
