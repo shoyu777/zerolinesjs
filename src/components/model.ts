@@ -1,3 +1,5 @@
+const HIDE_O_CLASS = 'zerolines_hidden_o';
+const SHOW_O_CLASS = 'zerolines_show_o';
 const HIDE_CLASS = 'zerolines_hidden';
 const SHOW_CLASS = 'zerolines_show';
 
@@ -14,10 +16,10 @@ class Modal {
   constructor(toggleElement: HTMLElement, parameter: string) {
     this.toggleElement = toggleElement;
 
-    const matched_target_selector = parameter.match(TARGET_REGEX);
-    if (matched_target_selector) {
+    const matchedTargetSelector = parameter.match(TARGET_REGEX);
+    if (matchedTargetSelector) {
       const toggleTarget = document.querySelector(
-        matched_target_selector[0]
+        matchedTargetSelector[0]
       ) as HTMLElement;
       this.toggleTarget = toggleTarget;
     }
@@ -58,16 +60,19 @@ class Modal {
     const modalContent = this.modalContent;
 
     // 初期状態でtargetとcontentを消した状態
-    toggleTarget.classList.add('zerolines_transition', HIDE_CLASS);
-    modalContent.classList.add('zerolines_transition', HIDE_CLASS);
+    toggleTarget.classList.add('zerolines_transition', HIDE_O_CLASS);
+    modalContent.classList.add('zerolines_transition', HIDE_O_CLASS);
+    modalBackdrop.classList.add('zerolines_transition', HIDE_O_CLASS);
 
     // show modal
     toggleElement.addEventListener('click', function () {
       if (toggleTarget) {
-        toggleTarget.classList.remove(HIDE_CLASS);
-        toggleTarget.classList.add(SHOW_CLASS);
-        modalContent.classList.remove(HIDE_CLASS);
-        modalContent.classList.add(SHOW_CLASS);
+        toggleTarget.classList.remove(HIDE_O_CLASS);
+        toggleTarget.classList.add(SHOW_O_CLASS);
+        modalContent.classList.remove(HIDE_O_CLASS);
+        modalContent.classList.add(SHOW_O_CLASS);
+        modalBackdrop.classList.remove(HIDE_O_CLASS);
+        modalBackdrop.classList.add(SHOW_O_CLASS);
 
         // scroll lock
         document.body.style.overflowY = 'hidden';
@@ -80,12 +85,12 @@ class Modal {
         // scroll unlock
         document.body.style.overflowY = '';
 
-        toggleTarget.classList.remove(SHOW_CLASS);
-        toggleTarget.classList.add(HIDE_CLASS);
-        modalBackdrop.classList.remove(SHOW_CLASS);
-        modalBackdrop.classList.add(HIDE_CLASS);
-        modalContent.classList.remove(SHOW_CLASS);
-        modalContent.classList.add(HIDE_CLASS);
+        toggleTarget.classList.remove(SHOW_O_CLASS);
+        toggleTarget.classList.add(HIDE_O_CLASS);
+        modalContent.classList.remove(SHOW_O_CLASS);
+        modalContent.classList.add(HIDE_O_CLASS);
+        modalBackdrop.classList.remove(SHOW_O_CLASS);
+        modalBackdrop.classList.add(HIDE_O_CLASS);
       }
     });
 
@@ -95,12 +100,12 @@ class Modal {
         // scroll unlock
         document.body.style.overflowY = '';
 
-        toggleTarget.classList.remove(SHOW_CLASS);
-        toggleTarget.classList.add(HIDE_CLASS);
-        modalBackdrop.classList.remove(SHOW_CLASS);
-        modalBackdrop.classList.add(HIDE_CLASS);
-        modalContent.classList.remove(SHOW_CLASS);
-        modalContent.classList.add(HIDE_CLASS);
+        toggleTarget.classList.remove(SHOW_O_CLASS);
+        toggleTarget.classList.add(HIDE_O_CLASS);
+        modalContent.classList.remove(SHOW_O_CLASS);
+        modalContent.classList.add(HIDE_O_CLASS);
+        modalBackdrop.classList.remove(SHOW_O_CLASS);
+        modalBackdrop.classList.add(HIDE_O_CLASS);
       });
     });
   }

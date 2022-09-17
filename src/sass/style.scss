@@ -8,11 +8,27 @@
   */
   &_hidden {
     visibility: hidden;
-    opacity: 0;
+    transition-duration: 0ms !important;
   }
   &_show {
     visibility: visible;
+    transition-duration: 0ms !important;
+  }
+  &_hidden_o {
+    visibility: hidden;
+    opacity: 0;
+  }
+  &_show_o {
+    visibility: visible;
     opacity: 1;
+  }
+  &_hidden_t {
+    visibility: hidden;
+    transform: translateX(-100%);
+  }
+  &_show_t {
+    visibility: visible;
+    transform: translateX(0);
   }
   /*
   // display
@@ -20,7 +36,7 @@
   &_transition {
     transition-property: opacity, visibility, transform;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 100ms;
+    transition-duration: 300ms;
   }
 
   /*

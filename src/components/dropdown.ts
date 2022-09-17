@@ -5,34 +5,34 @@ const SHOW_CLASS = 'zerolines_show';
 const TARGET_REGEX = /(?<=target-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa
 
 class DropDown {
-  toggle_element: HTMLElement;
-  toggle_target: HTMLElement;
+  toggleElement: HTMLElement;
+  toggleTarget: HTMLElement;
 
-  constructor(toggle_element: HTMLElement, parameter: string) {
-    this.toggle_element = toggle_element;
+  constructor(toggleElement: HTMLElement, parameter: string) {
+    this.toggleElement = toggleElement;
 
-    const matched_target_selector = parameter.match(TARGET_REGEX);
-    if (matched_target_selector) {
-      const toggle_target = document.querySelector(
-        matched_target_selector[0]
+    const matchedTargetSelector = parameter.match(TARGET_REGEX);
+    if (matchedTargetSelector) {
+      const toggleTarget = document.querySelector(
+        matchedTargetSelector[0]
       ) as HTMLElement;
-      this.toggle_target = toggle_target;
+      this.toggleTarget = toggleTarget;
     }
 
     this._init();
   }
 
   _init() {
-    const toggle_element = this.toggle_element;
-    const toggle_target = this.toggle_target;
+    const toggleElement = this.toggleElement;
+    const toggleTarget = this.toggleTarget;
 
     // 初期状態でtargetを消した状態
-    toggle_target.classList.add('zerolines_transition', HIDE_CLASS);
+    toggleTarget.classList.add('zerolines_transition', HIDE_CLASS);
 
-    toggle_element.addEventListener('click', function () {
-      if (toggle_target) {
-        toggle_target.classList.toggle(SHOW_CLASS);
-        toggle_target.classList.toggle(HIDE_CLASS);
+    toggleElement.addEventListener('click', function () {
+      if (toggleTarget) {
+        toggleTarget.classList.toggle(SHOW_CLASS);
+        toggleTarget.classList.toggle(HIDE_CLASS);
       }
     });
 
@@ -40,14 +40,14 @@ class DropDown {
     window.addEventListener('click', function (event) {
       if (
         event &&
-        (toggle_element.contains(event.target as HTMLElement) ||
-          toggle_target.contains(event.target as HTMLElement))
+        (toggleElement.contains(event.target as HTMLElement) ||
+          toggleTarget.contains(event.target as HTMLElement))
       ) {
         return;
       }
 
-      toggle_target.classList.remove(SHOW_CLASS);
-      toggle_target.classList.add(HIDE_CLASS);
+      toggleTarget.classList.remove(SHOW_CLASS);
+      toggleTarget.classList.add(HIDE_CLASS);
     });
   }
 }
