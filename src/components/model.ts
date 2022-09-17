@@ -1,4 +1,6 @@
-class DropDown {
+const HIDE_CLASS = 'hidden';
+
+class Modal {
   toggle_element: HTMLElement;
   toggle_target: HTMLElement;
 
@@ -10,27 +12,22 @@ class DropDown {
 
   _init(toggle_element: HTMLElement, toggle_target: HTMLElement) {
     // 初期状態でtargetを消した状態
-    toggle_target.classList.add('hidden');
+    toggle_target.classList.add(HIDE_CLASS);
 
     toggle_element.addEventListener('click', function () {
       if (toggle_target) {
-        toggle_target.classList.toggle('hidden');
+        toggle_target.classList.toggle(HIDE_CLASS);
       }
     });
 
-    // 範囲外をクリックされたらtargetを非表示
-    window.addEventListener('click', function (event) {
-      if (
-        event &&
-        (toggle_element.contains(event.target as HTMLElement) ||
-          toggle_target.contains(event.target as HTMLElement))
-      ) {
-        return;
+    const modalItems = toggle_target.querySelectorAll('[data-zl]');
+    // modal-backdropが存在すればクリック時にdismissするようにする
+    toggle_target.addEventListener('click', function (event) {
+      if (event && toggle_target === (event.target as HTMLElement)) {
+        toggle_target.classList.add(HIDE_CLASS);
       }
-
-      toggle_target.classList.add('hidden');
     });
   }
 }
 
-export default DropDown;
+export default Modal;
