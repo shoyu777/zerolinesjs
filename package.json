@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "run-p build:*",
-    "build:style": "sass src/sass/style.scss dist/style.min.css --style compressed",
+    "build:style": "sass src/sass/core.scss dist/core.min.css --style compressed",
     "build:js": "webpack --mode=production",
     "test": "jest",
     "lint": "run-s lint:*",

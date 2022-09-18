@@ -2,11 +2,13 @@ import Drawer from '../components/drawer';
 import DropDown from '../components/dropdown';
 import Modal from '../components/model';
 import ScrollTop from '../components/scrolltop';
+import Tab from '../components/tab';
 
 const SCROLL_TOP = 'scroll-top';
 const DROPDOWN_TOGGLE = 'dropdown-toggle';
 const MODAL_TOGGLE = 'modal-toggle';
 const DRAWER_TOGGLE = 'drawer-toggle';
+const TAB_LIST = 'tab-list';
 
 class Factory {
   public create(element: HTMLElement, parameter: string) {
@@ -25,6 +27,10 @@ class Factory {
     // Drawer
     if (parameter.includes(DRAWER_TOGGLE)) {
       new Drawer(element, parameter);
+    }
+    // Tab
+    if (parameter.includes(TAB_LIST)) {
+      new Tab(element);
     }
   }
 }
