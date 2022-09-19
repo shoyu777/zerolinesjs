@@ -1,7 +1,5 @@
 const HIDE_O_CLASS = 'zerolines_hidden_o';
 const SHOW_O_CLASS = 'zerolines_show_o';
-const HIDE_CLASS = 'zerolines_hidden';
-const SHOW_CLASS = 'zerolines_show';
 
 // regexs
 const TARGET_REGEX = /(?<=target-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa

@@ -56,7 +56,7 @@
       ></div>
     </div>
     <!-- Drawer End -->
-    <div class="max-w-screen-lg w-full h-screen mx-auto">
+    <div class="max-w-screen-lg w-full mx-auto">
       <div class="w-full p-6 flex space-x-6">
         <button
           class="px-6 py-2 bg-blue-600 text-white rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg active:text-white flex items-center"
@@ -260,6 +260,27 @@
     </div>
     <div class="bg-gray-400 w-full h-screen">page.4</div>
     <div class="bg-gray-500 w-full h-screen">page.5</div>
+    <!-- One Time -->
+    <div
+      class="z-50 w-full h-20 bg-white fixed bottom-0 p-4"
+      data-zl="one-time trigger-[#triggerButton1] expire-seconds-[20]"
+      zl-cloak
+    >
+      <div
+        class="max-w-screen-lg mx-auto text-sm h-full flex justify-between items-center space-x-4"
+      >
+        <p>
+          当サイトではCookieを使用します。Cookieの使用に関する詳細は「プライバシーポリシー」をご覧ください。
+        </p>
+        <button
+          id="triggerButton1"
+          type="button"
+          class="bg-blue-600 text-white px-10 py-3 rounded-sm"
+        >
+          OK
+        </button>
+      </div>
+    </div>
     <!-- Modal -->
     <div
       id="modal1"
@@ -299,7 +320,7 @@
       </div>
     </div>
     <!-- Scroll To TOp -->
-    <div class="fixed bottom-20 right-20 flex space-x-4">
+    <div class="fixed bottom-24 right-20 flex flex-col space-y-4">
       <button
         class="bg-gray-800 text-white rounded-full h-14 w-14 hover:bg-gray-600 transition"
         data-zl="scroll-top speedy"
