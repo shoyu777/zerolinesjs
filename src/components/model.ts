@@ -1,7 +1,7 @@
 import {
   HIDDEN_CLASS,
   modalAnimationClassList,
-  modalFadeClassList,
+  speedClassList,
   SHOW_CLASS,
   TRANSITION,
 } from '../utils/classList';
@@ -63,21 +63,20 @@ class Modal {
     const toggleTarget = this.toggleTarget;
     const modalBackdrop = this.modalBackdrop;
     const modalContent = this.modalContent;
-    const fadeClass = this._assembleFadeClass(modalContent.dataset.zl);
+    const speedClass = this._assembleSpeedClass(modalContent.dataset.zl);
     const animationClass = this._assembleAnimationClass(
       modalContent.dataset.zl
     );
 
     // 初期状態でtargetとcontentを消した状態
-    toggleTarget.classList.add(HIDDEN_CLASS);
-    modalContent.classList.add(HIDDEN_CLASS);
-    modalBackdrop.classList.add(HIDDEN_CLASS);
-
-    modalContent.classList.add(...fadeClass);
-    modalBackdrop.classList.add(...fadeClass);
-
-    modalContent.classList.add(SHOW_CLASS);
-    modalContent.classList.add(...animationClass);
+    toggleTarget.classList.add(HIDDEN_CLASS, ...speedClass);
+    modalBackdrop.classList.add(HIDDEN_CLASS, ...speedClass);
+    modalContent.classList.add(
+      HIDDEN_CLASS,
+      SHOW_CLASS,
+      ...animationClass,
+      ...speedClass
+    );
 
     // show modal
     toggleElement.addEventListener('click', function () {
@@ -144,10 +143,10 @@ class Modal {
     return result;
   }
 
-  _assembleFadeClass(parameter: string): Array<string> {
+  _assembleSpeedClass(parameter: string): Array<string> {
     const result: Array<string> = [];
 
-    modalFadeClassList.some((item) => {
+    speedClassList.some((item) => {
       if (parameter.includes(item)) {
         result.push('zerolines_' + item);
       }

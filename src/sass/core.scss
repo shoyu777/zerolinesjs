@@ -19,6 +19,9 @@
     transform: translateY(0);
     transition-duration: 0ms;
   }
+  &_hidden_drawer {
+    visibility: hidden !important;
+  }
   /*
   // display
   */
@@ -34,7 +37,7 @@
     opacity: 0;
   }
   &_opacity-100 {
-    opacity: 1;
+    opacity: 1 !important;
   }
   /*
   // transform
@@ -93,6 +96,15 @@
   &_move-left-lg {
     transform: translateX(3rem) !important;
   }
+  &_drawer-right {
+    transform: translateX(100%) !important;
+  }
+  &_drawer-left {
+    transform: translateX(-100%) !important;
+  }
+  &_drawer-top {
+    transform: translateY(-100%) !important;
+  }
   /*
   // zoom
   */
@@ -123,7 +135,7 @@
   &_slowly {
     transition-duration: 500ms !important;
   }
-  &_fade-none {
+  &_no-animation {
     transition-duration: 0ms !important;
   }
 }

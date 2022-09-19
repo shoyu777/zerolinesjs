@@ -19,12 +19,19 @@ export const modalAnimationClassList: Array<string> = [
   'zoom-out-lg',
 ];
 
-export const modalFadeClassList: Array<string> = [
+export const drawerAnimationClassList: Array<string> = [
+  'drawer-right',
+  'drawer-left',
+  'drawer-top',
+];
+
+export const speedClassList: Array<string> = [
   'quickly',
   'slowly',
-  'fade-none',
+  'no-animation',
 ];
 
 export const TRANSITION = 'zerolines_transition';
 export const HIDDEN_CLASS = 'zerolines_hidden';
+export const HIDDEN_DRAWER_CLASS = 'zerolines_hidden_drawer';
 export const SHOW_CLASS = 'zerolines_show';

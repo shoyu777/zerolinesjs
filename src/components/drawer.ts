@@ -1,9 +1,11 @@
-const HIDE_T_CLASS = 'zerolines_hidden_t';
-const SHOW_T_CLASS = 'zerolines_show_t';
-const HIDE_O_CLASS = 'zerolines_hidden_o';
-const SHOW_O_CLASS = 'zerolines_show_o';
-const HIDE_CLASS = 'zerolines_hidden';
-const SHOW_CLASS = 'zerolines_show';
+import {
+  HIDDEN_CLASS,
+  HIDDEN_DRAWER_CLASS,
+  TRANSITION,
+  SHOW_CLASS,
+  drawerAnimationClassList,
+  speedClassList,
+} from '../utils/classList';
 
 // regexs
 const TARGET_REGEX = /(?<=target-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa
@@ -60,20 +62,29 @@ class Drawer {
     const toggleTarget = this.toggleTarget;
     const drawerBackdrop = this.drawerBackdrop;
     const drawerContent = this.drawerContent;
+    const speedClass = this._assembleSpeedClass(drawerContent.dataset.zl);
+    const animationClass = this._assembleAnimationClass(
+      drawerContent.dataset.zl
+    );
 
     // 初期状態でbackdropとcontentを消した状態
-    toggleTarget.classList.add(HIDE_CLASS);
-    drawerContent.classList.add(HIDE_T_CLASS);
-    drawerBackdrop.classList.add(HIDE_O_CLASS);
+    toggleTarget.classList.add(HIDDEN_DRAWER_CLASS, ...speedClass);
+    drawerBackdrop.classList.add(HIDDEN_CLASS, ...speedClass);
+    drawerContent.classList.add(
+      HIDDEN_DRAWER_CLASS,
+      SHOW_CLASS,
+      ...animationClass,
+      ...speedClass
+    );
 
     toggleElement.addEventListener('click', function () {
       if (toggleTarget) {
-        toggleTarget.classList.remove(HIDE_CLASS);
-        drawerContent.classList.remove(HIDE_T_CLASS);
-        drawerBackdrop.classList.remove(HIDE_O_CLASS);
-        toggleTarget.classList.add('zerolines_transition', SHOW_CLASS);
-        drawerContent.classList.add('zerolines_transition', SHOW_T_CLASS);
-        drawerBackdrop.classList.add('zerolines_transition', SHOW_O_CLASS);
+        toggleTarget.classList.add(TRANSITION);
+        drawerContent.classList.add(TRANSITION);
+        drawerBackdrop.classList.add(TRANSITION);
+        toggleTarget.classList.remove(HIDDEN_DRAWER_CLASS);
+        drawerContent.classList.remove(HIDDEN_DRAWER_CLASS, ...animationClass);
+        drawerBackdrop.classList.remove(HIDDEN_CLASS);
 
         // scroll lock
         document.body.style.overflowY = 'hidden';
@@ -85,12 +96,10 @@ class Drawer {
         // scroll unlock
         document.body.style.overflowY = '';
 
-        toggleTarget.classList.remove(SHOW_CLASS);
-        toggleTarget.classList.add(HIDE_CLASS);
-        drawerContent.classList.remove(SHOW_T_CLASS);
-        drawerContent.classList.add(HIDE_T_CLASS);
-        drawerBackdrop.classList.remove(SHOW_O_CLASS);
-        drawerBackdrop.classList.add(HIDE_O_CLASS);
+        drawerContent.classList.add(...animationClass);
+        toggleTarget.classList.add(HIDDEN_DRAWER_CLASS);
+        drawerContent.classList.add(HIDDEN_DRAWER_CLASS);
+        drawerBackdrop.classList.add(HIDDEN_CLASS);
       }
     });
 
@@ -100,12 +109,10 @@ class Drawer {
         // scroll unlock
         document.body.style.overflowY = '';
 
-        toggleTarget.classList.remove(SHOW_CLASS);
-        toggleTarget.classList.add(HIDE_CLASS);
-        drawerContent.classList.remove(SHOW_T_CLASS);
-        drawerContent.classList.add(HIDE_T_CLASS);
-        drawerBackdrop.classList.remove(SHOW_O_CLASS);
-        drawerBackdrop.classList.add(HIDE_O_CLASS);
+        drawerContent.classList.add(...animationClass);
+        toggleTarget.classList.add(HIDDEN_DRAWER_CLASS);
+        drawerContent.classList.add(HIDDEN_DRAWER_CLASS);
+        drawerBackdrop.classList.add(HIDDEN_CLASS);
       });
     });
   }
@@ -117,6 +124,30 @@ class Drawer {
       typeof this.drawerContent !== 'undefined' &&
       typeof this.drawerBackdrop !== 'undefined'
     );
+  }
+
+  _assembleAnimationClass(parameter: string): Array<string> {
+    const result: Array<string> = [];
+
+    // translate
+    drawerAnimationClassList.some((item) => {
+      if (parameter.includes(item)) {
+        result.push('zerolines_' + item);
+      }
+    });
+
+    return result;
+  }
+
+  _assembleSpeedClass(parameter: string): Array<string> {
+    const result: Array<string> = [];
+
+    speedClassList.some((item) => {
+      if (parameter.includes(item)) {
+        result.push('zerolines_' + item);
+      }
+    });
+    return result;
   }
 }
 
