@@ -1,5 +1,10 @@
-const HIDE_O_CLASS = 'zerolines_hidden_o';
-const SHOW_O_CLASS = 'zerolines_show_o';
+import {
+  HIDDEN_CLASS,
+  modalAnimationClassList,
+  modalFadeClassList,
+  SHOW_CLASS,
+  TRANSITION,
+} from '../utils/classList';
 
 // regexs
 const TARGET_REGEX = /(?<=target-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa
@@ -10,9 +15,11 @@ class Modal {
   modalBackdrop: HTMLElement | undefined;
   modalContent: HTMLElement | undefined;
   modalDismissArray: Array<HTMLElement>;
+  parameter: string;
 
   constructor(toggleElement: HTMLElement, parameter: string) {
     this.toggleElement = toggleElement;
+    this.parameter = parameter;
 
     const matchedTargetSelector = parameter.match(TARGET_REGEX);
     if (matchedTargetSelector) {
@@ -56,21 +63,32 @@ class Modal {
     const toggleTarget = this.toggleTarget;
     const modalBackdrop = this.modalBackdrop;
     const modalContent = this.modalContent;
+    const fadeClass = this._assembleFadeClass(modalContent.dataset.zl);
+    const animationClass = this._assembleAnimationClass(
+      modalContent.dataset.zl
+    );
 
     // 初期状態でtargetとcontentを消した状態
-    toggleTarget.classList.add('zerolines_transition', HIDE_O_CLASS);
-    modalContent.classList.add('zerolines_transition', HIDE_O_CLASS);
-    modalBackdrop.classList.add('zerolines_transition', HIDE_O_CLASS);
+    toggleTarget.classList.add(HIDDEN_CLASS);
+    modalContent.classList.add(HIDDEN_CLASS);
+    modalBackdrop.classList.add(HIDDEN_CLASS);
+
+    modalContent.classList.add(...fadeClass);
+    modalBackdrop.classList.add(...fadeClass);
+
+    modalContent.classList.add(SHOW_CLASS);
+    modalContent.classList.add(...animationClass);
 
     // show modal
     toggleElement.addEventListener('click', function () {
       if (toggleTarget) {
-        toggleTarget.classList.remove(HIDE_O_CLASS);
-        toggleTarget.classList.add(SHOW_O_CLASS);
-        modalContent.classList.remove(HIDE_O_CLASS);
-        modalContent.classList.add(SHOW_O_CLASS);
-        modalBackdrop.classList.remove(HIDE_O_CLASS);
-        modalBackdrop.classList.add(SHOW_O_CLASS);
+        modalContent.classList.add(TRANSITION);
+        modalBackdrop.classList.add(TRANSITION);
+
+        toggleTarget.classList.remove(HIDDEN_CLASS);
+        modalContent.classList.remove(HIDDEN_CLASS);
+        modalBackdrop.classList.remove(HIDDEN_CLASS);
+        modalContent.classList.remove(...animationClass);
 
         // scroll lock
         document.body.style.overflowY = 'hidden';
@@ -83,12 +101,10 @@ class Modal {
         // scroll unlock
         document.body.style.overflowY = '';
 
-        toggleTarget.classList.remove(SHOW_O_CLASS);
-        toggleTarget.classList.add(HIDE_O_CLASS);
-        modalContent.classList.remove(SHOW_O_CLASS);
-        modalContent.classList.add(HIDE_O_CLASS);
-        modalBackdrop.classList.remove(SHOW_O_CLASS);
-        modalBackdrop.classList.add(HIDE_O_CLASS);
+        modalContent.classList.add(...animationClass);
+        toggleTarget.classList.add(HIDDEN_CLASS);
+        modalContent.classList.add(HIDDEN_CLASS);
+        modalBackdrop.classList.add(HIDDEN_CLASS);
       }
     });
 
@@ -98,12 +114,10 @@ class Modal {
         // scroll unlock
         document.body.style.overflowY = '';
 
-        toggleTarget.classList.remove(SHOW_O_CLASS);
-        toggleTarget.classList.add(HIDE_O_CLASS);
-        modalContent.classList.remove(SHOW_O_CLASS);
-        modalContent.classList.add(HIDE_O_CLASS);
-        modalBackdrop.classList.remove(SHOW_O_CLASS);
-        modalBackdrop.classList.add(HIDE_O_CLASS);
+        modalContent.classList.add(...animationClass);
+        toggleTarget.classList.add(HIDDEN_CLASS);
+        modalContent.classList.add(HIDDEN_CLASS);
+        modalBackdrop.classList.add(HIDDEN_CLASS);
       });
     });
   }
@@ -115,6 +129,30 @@ class Modal {
       typeof this.modalContent !== 'undefined' &&
       typeof this.modalBackdrop !== 'undefined'
     );
+  }
+
+  _assembleAnimationClass(parameter: string): Array<string> {
+    const result: Array<string> = [];
+
+    // translate
+    modalAnimationClassList.some((item) => {
+      if (parameter.includes(item)) {
+        result.push('zerolines_' + item);
+      }
+    });
+
+    return result;
+  }
+
+  _assembleFadeClass(parameter: string): Array<string> {
+    const result: Array<string> = [];
+
+    modalFadeClassList.some((item) => {
+      if (parameter.includes(item)) {
+        result.push('zerolines_' + item);
+      }
+    });
+    return result;
   }
 }
 

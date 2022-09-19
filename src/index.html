@@ -211,13 +211,13 @@
             <!-- Modal -->
             <div
               id="modal2"
-              class="z-50 bg-black bg-opacity-20 fixed inset-0 overflow-y-auto flex items-center justify-center"
+              class="z-10 bg-black bg-opacity-20 fixed inset-0 overflow-y-auto flex justify-center"
               data-zl="modal-backdrop"
               zl-cloak
             >
               <div
-                class="w-full max-w-sm mx-2 md:mx-0 bg-white rounded-lg pt-3 pb-6 px-3 flex flex-col items-center"
-                data-zl="modal-content"
+                class="mt-24 h-64 w-full max-w-md bg-white rounded-lg pt-3 pb-6 px-3 flex flex-col items-center"
+                data-zl="modal-content fade-none"
               >
                 <div class="w-full flex justify-end items-center">
                   <button data-zl="modal-dismiss">
@@ -262,18 +262,16 @@
     <div class="bg-gray-500 w-full h-screen">page.5</div>
     <!-- One Time -->
     <div
-      class="z-50 w-full h-20 bg-white fixed bottom-0 p-4"
-      data-zl="one-time trigger-[#triggerButton1] expire-seconds-[20]"
+      class="hidden z-50 bg-black bg-opacity-20 fixed inset-0 overflow-y-auto flex items-center justify-center"
+      data-zl="one-time trigger-[#triggerButton2] expire-seconds-[20]"
       zl-cloak
     >
       <div
-        class="max-w-screen-lg mx-auto text-sm h-full flex justify-between items-center space-x-4"
+        class="w-full max-w-sm mx-2 mx-auto bg-white rounded-lg pt-3 pb-6 px-3 flex flex-col items-center"
       >
-        <p>
-          当サイトではCookieを使用します。Cookieの使用に関する詳細は「プライバシーポリシー」をご覧ください。
-        </p>
+        <p>One Time キャンペーン</p>
         <button
-          id="triggerButton1"
+          id="triggerButton2"
           type="button"
           class="bg-blue-600 text-white px-10 py-3 rounded-sm"
         >

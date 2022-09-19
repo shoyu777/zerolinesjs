@@ -59,7 +59,6 @@ class OneTime {
     }
 
     // それ以外の場合、targetにイベントをつけて表示
-    this.contentElement.style.display = 'block';
     this.triggerElement.addEventListener('click', function () {
       const expireAt = current.getTime() + expireMilliSeconds;
       const data = JSON.stringify({ [KEY_NAME]: expireAt });

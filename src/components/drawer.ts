@@ -62,18 +62,18 @@ class Drawer {
     const drawerContent = this.drawerContent;
 
     // 初期状態でbackdropとcontentを消した状態
-    toggleTarget.classList.add('zerolines_transition', HIDE_CLASS);
-    drawerContent.classList.add('zerolines_transition', HIDE_T_CLASS);
-    drawerBackdrop.classList.add('zerolines_transition', HIDE_O_CLASS);
+    toggleTarget.classList.add(HIDE_CLASS);
+    drawerContent.classList.add(HIDE_T_CLASS);
+    drawerBackdrop.classList.add(HIDE_O_CLASS);
 
     toggleElement.addEventListener('click', function () {
       if (toggleTarget) {
         toggleTarget.classList.remove(HIDE_CLASS);
-        toggleTarget.classList.add(SHOW_CLASS);
         drawerContent.classList.remove(HIDE_T_CLASS);
-        drawerContent.classList.add(SHOW_T_CLASS);
         drawerBackdrop.classList.remove(HIDE_O_CLASS);
-        drawerBackdrop.classList.add(SHOW_O_CLASS);
+        toggleTarget.classList.add('zerolines_transition', SHOW_CLASS);
+        drawerContent.classList.add('zerolines_transition', SHOW_T_CLASS);
+        drawerBackdrop.classList.add('zerolines_transition', SHOW_O_CLASS);
 
         // scroll lock
         document.body.style.overflowY = 'hidden';
