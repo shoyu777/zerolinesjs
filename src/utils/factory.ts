@@ -1,6 +1,6 @@
 import Drawer from '../components/drawer';
 import DropDown from '../components/dropdown';
-import Modal from '../components/model';
+import Modal from '../components/modal';
 import OneTime from '../components/oneTime';
 import ScrollTop from '../components/scrolltop';
 import Tab from '../components/tab';
