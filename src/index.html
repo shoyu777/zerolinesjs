@@ -8,7 +8,7 @@
     <script type="module" src="./index.ts"></script>
     <link href="./sass/core.scss" rel="stylesheet" />
   </head>
-  <body class="bg-gray-100">
+  <body class="bg-gray-100" zl-observe>
     <div class="max-w-screen-lg w-full mx-auto">
       <div class="w-full p-6 flex space-x-6">
         <button
@@ -211,8 +211,8 @@
         </div>
       </div>
     </div>
-    <div class="bg-gray-400 w-full h-screen">page.4</div>
-    <div class="bg-gray-500 w-full h-screen">page.5</div>
+    <div id="page4" class="bg-gray-400 w-full h-screen">page.4</div>
+    <div id="page5" class="bg-gray-500 w-full h-screen">page.5</div>
     <!-- One Time -->
     <div
       class="hidden z-50 bg-black bg-opacity-20 fixed inset-0 overflow-y-auto flex items-center justify-center"
@@ -336,5 +336,29 @@
       ></div>
     </div>
     <!-- Drawer End -->
+    <template id="temp">
+      <div class="relative">
+        <button
+          class="px-6 py-2 border"
+          type="button"
+          data-zl="dropdown-toggle target-[#dropdownMenu2]"
+        >
+          Dropdown button
+        </button>
+        <ul
+          id="dropdownMenu2"
+          class="absolute bg-white py-2 rounded shadow-lg mt-1"
+          zl-cloak
+        >
+          <li>
+            <a
+              class="py-2 px-4 block w-full text-gray-700 hover:bg-gray-100"
+              href="#"
+              >Action</a
+            >
+          </li>
+        </ul>
+      </div>
+    </template>
   </body>
 </html>

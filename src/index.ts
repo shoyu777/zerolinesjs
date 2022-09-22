@@ -1,22 +1,14 @@
-import Factory from './utils/factory';
+import {
+  createModule,
+  deleteCloak,
+  setMutationObserver,
+} from './utils/initUtils';
 
 function init() {
   if (typeof window === 'object') {
-    const elements = document.querySelectorAll('[data-zl]');
-
-    const factory = new Factory();
-
-    elements.forEach((element) => {
-      if (element instanceof HTMLElement) {
-        factory.create(element, element.dataset.zl);
-      }
-    });
-
-    document.querySelectorAll('[zl-cloak]').forEach((element) => {
-      if (element instanceof HTMLElement) {
-        element.removeAttribute('zl-cloak');
-      }
-    });
+    createModule(document);
+    setMutationObserver();
+    deleteCloak(document);
   }
 }
 
