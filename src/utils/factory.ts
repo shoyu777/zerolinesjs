@@ -16,7 +16,7 @@ class Factory {
   public create(element: HTMLElement, parameter: string) {
     // Scroll Top
     if (parameter.includes(SCROLL_TOP)) {
-      new ScrollTop(element);
+      new ScrollTop(element, parameter);
     }
     // DropDown
     if (parameter.includes(DROPDOWN_TOGGLE)) {

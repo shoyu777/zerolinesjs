@@ -28,7 +28,8 @@ export function setMutationObserver() {
   // mutation observer setting
   const callback = function (
     mutationsList: Array<MutationRecord>,
-    observer: MutationObserver
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _observer: MutationObserver
   ) {
     for (const mutation of mutationsList) {
       if (mutation.type === 'childList') {

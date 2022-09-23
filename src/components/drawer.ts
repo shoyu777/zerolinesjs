@@ -136,6 +136,11 @@ class Drawer {
       }
     });
 
+    // default set
+    if (result.length === 0) {
+      result.push('zerolines_drawer-right');
+    }
+
     return result;
   }
 
