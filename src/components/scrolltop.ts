@@ -1,7 +1,7 @@
 import { HIDDEN_CLASS, SHOW_CLASS, TRANSITION } from '../utils/classList';
 
 // regexs
-const TOGGLE_AT_REGEX = /(?<=toggle-at-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa
+const TOGGLE_AT_REGEX = /toggle-at-\[([^\]]+)\]/;
 const DFAULT_TOGGLE_AT = 0;
 
 class ScrollTop {
@@ -16,10 +16,11 @@ class ScrollTop {
     const matchedString = parameter.match(TOGGLE_AT_REGEX);
     if (
       matchedString &&
-      !Number.isNaN(matchedString[0]) &&
-      parseInt(matchedString[0]) > 0
+      matchedString[1] &&
+      !Number.isNaN(matchedString[1]) &&
+      parseInt(matchedString[1]) > 0
     ) {
-      this.toggleAt = parseInt(matchedString[0]);
+      this.toggleAt = parseInt(matchedString[1]);
     } else {
       this.toggleAt = DFAULT_TOGGLE_AT;
     }

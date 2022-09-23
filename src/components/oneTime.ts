@@ -1,6 +1,6 @@
 // regexs
-const TARGET_REGEX = /(?<=trigger-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa
-const EXPIRE_REGEX = /(?<=expire-seconds-\[).*?(?=\])/g;
+const TRIGGER_REGEX = /trigger-\[([^\]]+)\]/;
+const EXPIRE_REGEX = /expire-seconds-\[([^\]]+)\]/;
 
 const STORAGE_KEY = 'zlPopupFlag';
 const DEFAULT_EXPIRE_MILLI_SECONDS = 1000 * 60 * 60 * 24 * 365;
@@ -13,10 +13,10 @@ class OneTime {
   constructor(contentElement: HTMLElement, parameter: string) {
     this.contentElement = contentElement;
 
-    const matchedTargetSelector = parameter.match(TARGET_REGEX);
-    if (matchedTargetSelector) {
+    const matchedTriggerSelector = parameter.match(TRIGGER_REGEX);
+    if (matchedTriggerSelector && matchedTriggerSelector[1]) {
       const triggerElement = contentElement.querySelector(
-        matchedTargetSelector[0]
+        matchedTriggerSelector[1]
       ) as HTMLElement;
       this.triggerElement = triggerElement;
     }
@@ -25,10 +25,11 @@ class OneTime {
     const matchedExpireSelector = parameter.match(EXPIRE_REGEX);
     if (
       matchedExpireSelector &&
-      !Number.isNaN(matchedExpireSelector[0]) &&
-      parseInt(matchedExpireSelector[0]) > 0
+      matchedExpireSelector[1] &&
+      !Number.isNaN(matchedExpireSelector[1]) &&
+      parseInt(matchedExpireSelector[1]) > 0
     ) {
-      this.expireMilliSeconds = parseInt(matchedExpireSelector[0]) * 1000;
+      this.expireMilliSeconds = parseInt(matchedExpireSelector[1]) * 1000;
     } else {
       this.expireMilliSeconds = DEFAULT_EXPIRE_MILLI_SECONDS;
     }

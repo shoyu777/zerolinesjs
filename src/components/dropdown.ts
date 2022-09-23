@@ -2,7 +2,7 @@ const HIDE_CLASS = 'zerolines_hidden';
 const SHOW_CLASS = 'zerolines_show';
 
 // regexs
-const TARGET_REGEX = /(?<=target-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa
+const TARGET_REGEX = /target-\[([^\]]+)\]/; // ex. target-[#aaa] -> #aaa
 
 class DropDown {
   toggleElement: HTMLElement;
@@ -12,9 +12,9 @@ class DropDown {
     this.toggleElement = toggleElement;
 
     const matchedTargetSelector = parameter.match(TARGET_REGEX);
-    if (matchedTargetSelector) {
+    if (matchedTargetSelector && matchedTargetSelector[1]) {
       const toggleTarget = document.querySelector(
-        matchedTargetSelector[0]
+        matchedTargetSelector[1]
       ) as HTMLElement;
       this.toggleTarget = toggleTarget;
     }

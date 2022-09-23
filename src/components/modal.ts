@@ -7,7 +7,7 @@ import {
 } from '../utils/classList';
 
 // regexs
-const TARGET_REGEX = /(?<=target-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa
+const TARGET_REGEX = /target-\[([^\]]+)\]/; // ex. target-[#aaa] -> #aaa
 
 class Modal {
   toggleElement: HTMLElement | undefined;
@@ -22,9 +22,9 @@ class Modal {
     this.parameter = parameter;
 
     const matchedTargetSelector = parameter.match(TARGET_REGEX);
-    if (matchedTargetSelector) {
+    if (matchedTargetSelector && matchedTargetSelector[1]) {
       const toggleTarget = document.querySelector(
-        matchedTargetSelector[0]
+        matchedTargetSelector[1]
       ) as HTMLElement;
       this.toggleTarget = toggleTarget;
     }

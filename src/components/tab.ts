@@ -1,8 +1,8 @@
 const TAB_TOGGLE = 'tab-item';
 
 // regexs
-const TARGET_REGEX = /(?<=target-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa
-const SQUARE_BRACKETS = /(?<=\[).*?(?=\])/g;
+const TARGET_REGEX = /target-\[([^\]]+)\]/; // ex. target-[#aaa] -> #aaa
+const SQUARE_BRACKETS = /\[([^\]]+)\]/g;
 
 class Tab {
   tabList: Array<HTMLElement>;
@@ -38,8 +38,8 @@ class Tab {
         element.classList.remove(...defaultClassArray(element));
 
         const matchedTargetSelector = element.dataset.zl.match(TARGET_REGEX);
-        if (matchedTargetSelector) {
-          toggleElementByDisplay(matchedTargetSelector[0], 'block');
+        if (matchedTargetSelector && matchedTargetSelector[1]) {
+          toggleElementByDisplay(matchedTargetSelector[1], 'block');
         }
       }
 
@@ -52,8 +52,8 @@ class Tab {
         element.classList.remove(...defaultClassArray(element));
 
         const matchedTargetSelector = this.dataset.zl.match(TARGET_REGEX);
-        if (matchedTargetSelector) {
-          toggleElementByDisplay(matchedTargetSelector[0], 'block');
+        if (matchedTargetSelector && matchedTargetSelector[1]) {
+          toggleElementByDisplay(matchedTargetSelector[1], 'block');
         }
       });
     });
@@ -70,8 +70,8 @@ class Tab {
 
       // 全てのtab-content要素を非表示
       const matchedTargetSelector = parameter.match(TARGET_REGEX);
-      if (matchedTargetSelector) {
-        toggleElementByDisplay(matchedTargetSelector[0], 'none');
+      if (matchedTargetSelector && matchedTargetSelector[1]) {
+        toggleElementByDisplay(matchedTargetSelector[1], 'none');
       }
     });
   }
@@ -79,15 +79,15 @@ class Tab {
 
 export function activeClassArray(element: HTMLElement): Array<string> {
   // active-classes-[text-red-500 font-bold] -> text-red-500 font-bold
-  const ACTIVE_STYLE = /(?<=active-style-\[).*?(?=\])/g;
+  const ACTIVE_STYLE = /active-style-\[([^\]]+)\]/;
   const parameter = element.dataset.zl;
 
   let activeClassArray: Array<string> = [];
 
   // active-styleの取得
   const activeStyleMatch = parameter.match(ACTIVE_STYLE);
-  if (activeStyleMatch) {
-    activeClassArray = activeStyleMatch[0].split(' ');
+  if (activeStyleMatch && activeStyleMatch[1]) {
+    activeClassArray = activeStyleMatch[1].split(' ');
   }
 
   return activeClassArray;
@@ -95,15 +95,15 @@ export function activeClassArray(element: HTMLElement): Array<string> {
 
 export function defaultClassArray(element: HTMLElement): Array<string> {
   // active-classes-[text-red-500 font-bold] -> text-red-500 font-bold
-  const DEFAULT_STYLE = /(?<=default-style-\[).*?(?=\])/g;
+  const DEFAULT_STYLE = /default-style-\[([^\]]+)\]/;
   const parameter = element.dataset.zl;
 
   let defaultClassArray: Array<string> = [];
 
   // default-styleの取得
   const defaultStyleMatch = parameter.match(DEFAULT_STYLE);
-  if (defaultStyleMatch) {
-    defaultClassArray = defaultStyleMatch[0].split(' ');
+  if (defaultStyleMatch && defaultStyleMatch[1]) {
+    defaultClassArray = defaultStyleMatch[1].split(' ');
   }
 
   return defaultClassArray;

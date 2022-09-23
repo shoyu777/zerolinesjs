@@ -8,7 +8,7 @@ import {
 } from '../utils/classList';
 
 // regexs
-const TARGET_REGEX = /(?<=target-\[).*?(?=\])/g; // ex. target-[#aaa] -> #aaa
+const TARGET_REGEX = /target-\[([^\]]+)\]/;
 
 class Drawer {
   toggleElement: HTMLElement;
@@ -21,9 +21,9 @@ class Drawer {
     this.toggleElement = toggleElement;
 
     const matchedTargetSelector = parameter.match(TARGET_REGEX);
-    if (matchedTargetSelector) {
+    if (matchedTargetSelector && matchedTargetSelector[1]) {
       const toggleTarget = document.querySelector(
-        matchedTargetSelector[0]
+        matchedTargetSelector[1]
       ) as HTMLElement;
       this.toggleTarget = toggleTarget;
     }
