@@ -13,8 +13,8 @@ Headless UI components without writing a single line of JavaScript.
 Add library from CDN, or download from Release Page on Github.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/zerolinesjs@0.1.0/dist/index.js" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/zerolinesjs@0.1.0/dist/style.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/zerolinesjs@0.1.1/dist/index.js" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/zerolinesjs@0.1.1/dist/style.min.css" rel="stylesheet" />
 ```
 
 Simply attach roll and behavior to your styled HTML element with `data-zl` attribute.
