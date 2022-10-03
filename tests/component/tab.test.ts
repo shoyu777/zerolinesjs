@@ -1,40 +1,35 @@
-describe('sample', () => {
-  it('sample', () => {
-    // コンソールのログ出力を監視し、その文字列を返す
-    const log = jest.spyOn(console, 'log').mockReturnValue();
+import Tab from '../../src/components/tab';
 
-    expect(true).toEqual(true);
+const tabMarkup =
+  '<div id="tab-list" data-zl="tab-list">' +
+  '  <button type="button" data-zl="tab-item target-[#tab1] default active-style-[active]">' +
+  '    Tab 1' +
+  '  </button>' +
+  '  <button type="button" data-zl="tab-item target-[#tab2] active-style-[active]">' +
+  '    Tab 2' +
+  '  </button>' +
+  '</div>' +
+  '<div id="tab1">' +
+  '  Tab1 content' +
+  '</div>' +
+  '<div id="tab2">' +
+  '  Tab2 content' +
+  '</div>';
 
-    // 'jest.spyOn()' によって作成されたモックをリセット
-    log.mockRestore();
-  });
-
-  it('displays a user after a click', () => {
-    // コンソールのログ出力を監視し、その文字列を返す
-    const log = jest.spyOn(console, 'log').mockReturnValue();
-
+describe('tab', () => {
+  it('初期状態でtabコンテンツがdefault以外hiddenとなっていること', () => {
     // Set up our document body
-    document.body.innerHTML =
-      '<div>' +
-      '  <span id="username" />' +
-      '  <button id="button" />' +
-      '</div>';
+    document.body.innerHTML = tabMarkup;
 
-    const button = document.getElementById('button');
-    button?.addEventListener('click', function () {
-      console.log('hello');
-    });
-    if (button) button.click();
-    // Assert that the fetchCurrentUser function was called, and that the
-    // #username span's inner text was updated as we'd expect it to.
-    expect(log).toHaveBeenNthCalledWith(1, 'hello');
+    const tabList = document.getElementById('tab-list') as HTMLElement;
+    const tabContent1 = document.getElementById('tab1') as HTMLElement;
+    const tabContent2 = document.getElementById('tab2') as HTMLElement;
 
-    // 'jest.spyOn()' によって作成されたモックをリセット
-    log.mockRestore();
-  });
+    new Tab(tabList);
 
-  it('use jsdom in this test file', () => {
-    const element = document.createElement('div');
-    expect(element).not.toBeNull();
+    // tab1はdisplay-blockとなっていること
+    expect(tabContent1.style.display).toEqual('block');
+    // tab2はdisplay-noneとなっていること
+    expect(tabContent2.style.display).toEqual('none');
   });
 });

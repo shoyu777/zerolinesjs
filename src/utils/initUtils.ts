@@ -1,7 +1,7 @@
 import Factory from './factory';
 
-export function deleteCloak(element: HTMLElement | Document) {
-  element.querySelectorAll('[zl-cloak]').forEach((element) => {
+export function deleteCloak(targetElement: HTMLElement | Document) {
+  targetElement.querySelectorAll('[zl-cloak]').forEach((element) => {
     if (element instanceof HTMLElement) {
       element.removeAttribute('zl-cloak');
     }
